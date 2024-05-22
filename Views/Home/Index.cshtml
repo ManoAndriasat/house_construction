@@ -1,0 +1,128 @@
+﻿    <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-text mx-3">CONSTRUCTION <sup>1</sup></div>
+                </a>
+                <br>
+                <div class="sidebar-heading">Addons</div>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index"><span>Charts</span></a>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">Addons</div>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Privacy"><span>Privacy</span></a>
+                </li>
+            </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <div class="container-fluid">
+                
+<div class="container">
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <button type="button" class="btn btn-primary mb-4 " data-toggle="modal" data-target="#exampleModal">
+                new user
+            </button>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                    </tr>
+                    <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>63</td>
+                        <td>2011/07/25</td>
+                        <td>$170,750</td>
+                    </tr>
+                    <tr>
+                        <td>Ashton Cox</td>
+                        <td>Junior Technical Author</td>
+                        <td>San Francisco</td>
+                        <td>66</td>
+                        <td>2009/01/12</td>
+                        <td>$86,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Formulaire Modal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+            </div>
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+            </div>
+            <div class="form-group">
+                <label for="message">Message :</label>
+                <textarea class="form-control" id="message" rows="3" placeholder="Entrez votre message"></textarea>
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary">Envoyer</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+        </div>
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-text mx-3">CONSTRUCTION <sup>1</sup></div>
+                </a>
+                <br>
+               <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Dashboard"><span>Dashboard</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Listedevise"><span>Liste Devise</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Travaux" asp-action="Index"><span>Liste Travaux</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="ImportData" asp-action="ImportFormPayement"><span>Import Payement</span></a>
+                </li>
+                <li class="nav-item">
+            <a class="nav-link" asp-controller="ImportData" asp-action="ImportMaisonDevis"><span>Import Travaux/Devis</span></a>
+        </li>
+            </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <div class="container-fluid">
+                    <div class="container">
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <strong>TOTAL DEVIS : @ViewBag.TotalDevis</strong>
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <strong>TOTAL PAYEMENT EFFECTUE : @ViewBag.TotalPayement</strong>
+                            </div>
+                            <hr>
+                            <div class="card-body">
+
+                                <div class="table-responsive">
+                                <select id="selectYear" onchange="updateChart()" class="form-control">
+                                    @for (int year = 2025; year > 2000; year--)
+                                    {
+                                        <option value="@year">@year</option>
+                                    }
+                                </select>
+                                @if (ViewBag.SommeMois != null)
+                                        {
+                                            <canvas id="ChartMois"></canvas>
+                                            <canvas id="ChartAnnee"></canvas>
+                                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    var sommeMoisJson = '@Html.Raw(ViewBag.SommeMois)';
+    var sommeMois = JSON.parse(sommeMoisJson);
+
+    function updateChart() {
+        var selectedYear = document.getElementById('selectYear').value;
+        var filteredData = sommeMois.filter(function(item) {
+            var date = new Date(item.Item1);
+            return date.getFullYear().toString() === selectedYear;
+        });
+
+        // Générer un ensemble de labels pour tous les mois de l'année
+        var monthsLabels = [];
+        for (var i = 0; i < 12; i++) {
+            var monthDate = new Date(selectedYear, i, 1);
+            var monthLabel = monthDate.toLocaleString('default', { month: 'short' }) + ' ' + monthDate.getFullYear();
+            monthsLabels.push(monthLabel);
+        }
+
+        var datas = Array.from({ length: 12 }, () => 0); // Remplir les données avec des zéros pour tous les mois
+        filteredData.forEach(function(item) {
+            var date = new Date(item.Item1);
+            var monthIndex = date.getMonth();
+            datas[monthIndex] = item.Item2;
+        });
+
+        ChartMois.data.labels = monthsLabels;
+        ChartMois.data.datasets[0].data = datas;
+        ChartMois.update();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateChart();
+    });
+
+    var ctx = document.getElementById('ChartMois').getContext('2d');
+    var ChartMois = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Somme mensuelle',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    data: [],
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100000000
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
+    <script>
+    var sommeAnneeJson = '@Html.Raw(ViewBag.SommeAnnee)'; // Récupère le JSON depuis ViewBag
+    var sommeAnnee = JSON.parse(sommeAnneeJson);
+    var labels = [];
+    var datas = [];
+    sommeAnnee.forEach(function(item) {
+        var date = new Date(item.Item1);
+        labels.push(date);
+        datas.push(item.Item2);
+    });
+    var data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Somme Annuel',
+                backgroundColor: 'rgba(255,0,0,0.3)',
+                borderColor: 'rgba(255,0,0)',
+                borderWidth: 1,
+                data: datas,
+            }
+        ]
+    };
+    var options = {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+    var ctx = document.getElementById('ChartAnnee').getContext('2d');
+    var ChartAnnee = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+    </script>
+
+</body>
+</html>

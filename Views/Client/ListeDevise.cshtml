@@ -1,0 +1,75 @@
+    <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-text mx-3">CONSTRUCTION <sup>1</sup></div>
+                </a>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Client" asp-action="FormCreateDevise"><span>Create Devis</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Client" asp-action="Listedevise"><span>Liste</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Client" asp-action=PayementForm><span>Payement</span></a>
+                </li>
+            </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+            <div class="container-fluid">
+                
+            <div class="container">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            @if (ViewBag.payementDetails != null)
+                                {
+                                <thead>
+                                    <tr>
+                                        <th>Id Devise Client</th>
+                                        <th>Users</th>
+                                        <th>Date</th>
+                                        <th>Total</th>
+                                        <th>Reste</th>
+                                        <th>Payer</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var deviseClient in ViewBag.payementDetails)
+                                    {
+                                        <tr>
+                                            <td>@deviseClient.IdDeviseClient</td>
+                                            <td>@deviseClient.Users</td>
+                                            <td>@deviseClient.Date</td>
+                                            <td>@deviseClient.Total.ToString("0.00")</td>
+                                            <td>@deviseClient.Reste.ToString("0.00")</td>
+                                            <td>@deviseClient.Payer.ToString("0.00")</td>
+                                            <td><a href="/Client/Export?idDeviseClient=@deviseClient.IdDeviseClient">View</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                                }
+                                else
+                                {
+                                    <p>Aucune devise client trouvée.</p>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

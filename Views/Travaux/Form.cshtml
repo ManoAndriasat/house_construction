@@ -1,0 +1,76 @@
+    <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-text mx-3">CONSTRUCTION <sup>1</sup></div>
+                </a>
+                <br>
+               <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Dashboard"><span>Dashboard</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Listedevise"><span>Liste Devise</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Travaux" asp-action="Index"><span>Liste Travaux</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Finition" asp-action="Index"><span>Liste Finition</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="ImportData" asp-action="ImportFormPayement"><span>Import Payement</span></a>
+                </li>
+                <li class="nav-item">
+            <a class="nav-link" asp-controller="ImportData" asp-action="ImportMaisonDevis"><span>Import Travaux/Devis</span></a>
+        </li>
+            </ul>
+
+
+    <div id="content-wrapper" class="d-flex flex-column">
+    
+        <div id="content">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+            <div class="container-fluid">
+                
+            <div class="container">
+                <div class="card shadow mb-3">
+                    <div class="card-body">
+                        <form id="updateForm" asp-controller="Travaux" asp-action="Update">
+                            <div class="form-group">
+                                <label for="idTravaux">Id Travaux :</label>
+                                <input type="text" class="form-control" id="idTravaux" name="idTravaux" value="@ViewBag.Travau.IdTravaux" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="idCategorie">Id Categorie :</label>
+                                <input type="text" class="form-control" id="idCategorie" name="idCategorie" value="@ViewBag.Travau.IdCategorie" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="designation">Designation :</label>
+                                <input type="text" class="form-control" id="designation" name="designation" value="@ViewBag.Travau.Designation">
+                            </div>
+                            <div class="form-group">
+                                <label for="unite">Unite :</label>
+                                <input type="text" class="form-control" id="unite" name="unite" value="@ViewBag.Travau.Unite">
+                            </div>
+                            <div class="form-group">
+                                <label for="pu">PU :</label>
+                                <input type="text" class="form-control" id="pu" name="pu" value="@ViewBag.Travau.PU.ToString("0.00")">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="form-control" value="update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+

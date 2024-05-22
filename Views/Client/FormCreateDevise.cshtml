@@ -1,0 +1,121 @@
+    <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-text mx-3">CONSTRUCTION <sup>1</sup></div>
+                </a>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Client" asp-action="FormCreateDevise"><span>Create Devis</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Client" asp-action="Listedevise"><span>Liste</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Client" asp-action="PayementForm"><span>Payement</span></a>
+                </li>
+            </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <div class="container-fluid">
+                
+            <div class="container">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <form asp-controller="Client" asp-action="CreateDevise" method="get">
+                            <div class="type-maison">
+                            <center>
+                                @foreach (var item in ViewBag.TypeMaisons)
+                                {
+                                    <span class="maison">
+                                        <p class="titre">@item.Nom</p>
+                                        <p>
+                                         Details:   @item.Details
+                                        </p>
+                                        <p>
+                                           Surface:  @item.Surface
+                                        </p>
+                                        <p>
+                                           Prix:  @item.Total
+                                        </p>
+                                        <input type="radio" name="typeMaison" value="@item.Id" id="@item.Id">
+                                    </span>
+                                }
+                            </center>
+
+                            </div>
+
+                            <div class="finition">
+                            <label for="fintion">finiton</label>
+                                <select name="finition" id="finition">
+                                    @foreach (var item in ViewBag.Finitions)
+                                    {
+                                        <option value="@item.Id">@item.Nom</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="date">
+                            <label for="date">date</label>
+                                <input type="date" name="date" id="date" value="2024-05-13">
+                            </div>
+                            <div class="designation">
+                            <label for="designation">designation</label>
+                                <input name="designation" id="designation"  type="text">
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="valider">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<style>
+.titre{
+    background : orange;
+    color : white;
+    border-radius : 5px;
+    padding : 5px;
+}
+.maison {
+    display: inline-block; /* Afficher en ligne */
+    width: 20%; /* Largeur du carré */
+    height: 200px; /* Largeur du carré */
+    background-color: #ccc; /* Couleur de fond du carré */
+    margin-right: 10px; /* Marge à droite pour l'espacement */
+    text-align: center; /* Alignement du texte au centre */
+    border-radius: 5px; /* Coins arrondis */
+}
+    select, input[type="date"], input[type="text"] {
+        width: 100%; /* Largeur à 100% */
+        padding: 8px; /* Rembourrage intérieur */
+        margin-bottom: 15px; /* Marge en bas */
+        border: 1px solid #ccc; /* Bordure légère */
+        border-radius: 5px; /* Coins arrondis */
+        box-sizing: border-box; /* Boîte modélisée */
+    }
+
+    .btn-primary {
+        padding: 10px 20px; /* Rembourrage pour le bouton */
+        background-color: #007bff; /* Couleur de fond du bouton */
+        color: #fff; /* Couleur du texte */
+        border: none; /* Pas de bordure */
+        border-radius: 5px; /* Coins arrondis */
+        cursor: pointer; /* Curseur pointeur */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Couleur de fond du bouton au survol */
+    }
+
+</style>
